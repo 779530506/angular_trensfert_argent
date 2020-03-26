@@ -1,0 +1,41 @@
+<div class="row">
+    <h2>Liste des utlisateurs</h2>
+    <div class="row offset-md-10">
+        <a routerLink="/add_user"  class="btn btn-success  col ">add user</a>
+        </div><br>
+         <div class="row">
+       <table class="table table-striped table-responsive">
+           <thead class="thead">
+               <tr>
+                   <th>Nom</th>
+                   <th>Prenom</th>
+                   <th>Telephon</th>
+                   <th>Email</th>
+                   <th>Status</th>
+                   <th>Editer</th>
+                   <th>View</th>
+               </tr>
+           </thead>
+           <tbody>
+               <tr *ngFor="let user of users">
+                   <td scope="row">{{user.nom}}</td>
+                   <td scope="row">{{user.prenom}}</td>
+                   <td scope="row">{{user.telephon}}</td>
+                   <td scope="row">{{user.email}}</td>
+                   <td *ngIf="user.isActive===true; else elseBlock">
+                       <button (click)="onStatus(user.id)" class="btn btn-success">
+                       On</button>
+                    </td>
+                    <ng-template #elseBlock>
+                        <td><button  (click)="onStatus(user.id)" class="btn btn-danger">Of</button></td> 
+                        </ng-template>
+                   <td><a [routerLink]="['/edit_user', user.id]"  class="btn btn-success"> Edit</a></td>
+                   <td><a [routerLink]="['/view_user', user.id]" class="btn btn-primary"> View</a></td>
+               </tr>
+
+           </tbody>
+       </table>
+         </div>
+ 
+    
+</div>  

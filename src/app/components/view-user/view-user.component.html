@@ -1,0 +1,51 @@
+<div class="view">
+    <h2>Information générale</h2>
+     <div class="delete" >
+        <a [routerLink]="['/edit', user.id]"  class="btn btn-success"> Edit</a>-- 
+        <a (click)='onDelete(user)' class="btn btn-danger">Delete</a></div> 
+       <table class="table col-md-10">
+        <tbody>
+            <tr>
+                <td scope="row">id</td>
+                <td>{{user.id}}</td>
+            </tr>
+            <tr>
+                <td scope="row">nom</td>
+                <td>{{user.nom}}</td>
+            </tr>
+            <tr>
+                <td>prenom</td>
+                <td>{{user.prenom}}</td>
+            </tr>
+            <tr>
+                <td scope="row">Email</td>
+                <td>{{user.email}}</td>
+            </tr>
+            <tr>
+                <td>Telephone</td>
+                <td>{{user.telephon}}</td>
+            </tr>
+            <tr>
+                <td scope="row">Etat du compte</td>
+                <td *ngIf="user.isActive==true">Activé</td>
+                <td *ngIf="user.isActive==false">Desactivé</td>
+            </tr>
+            <tr>
+                <td>Role</td>
+                <td>{{user.roles[0]}}</td>
+            </tr>
+            <tr>
+                <td scope="row">Date de naissance</td>
+                <td>{{user.dateNaissance | date: 'dd/MM/yyyy'}}</td>
+            </tr>
+            <tr>
+                <td>Adresse</td>
+                <td>{{user.adresse}}</td>
+             </tr>
+             <tr>
+                    <td>Username</td>
+                    <td>{{user.username}}</td>
+             </tr>
+        </tbody>
+    </table>
+</div>

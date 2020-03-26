@@ -12,6 +12,14 @@ import { LoginComponent } from './authentification/login/login.component';
 import {AuthServiceService} from './authentification/auth-service.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { InterceptorService } from './helper/interceptor.service';
+import { AuthGuard } from './helper/auth.guard';
+import { UserServiceService } from './service/user-service.service';
+import { AddCompteComponent } from './components/add-compte/add-compte.component';
+import { ListeUserComponent } from './components/liste-user/liste-user.component';
+import { ViewUserComponent } from './components/view-user/view-user.component';
+import { AddUserComponent } from './components/add-user/add-user.component';
+
 
 @NgModule({
   declarations: [
@@ -22,6 +30,10 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
     FooterComponent,
     DashboardComponent,
     LoginComponent,
+    AddCompteComponent,
+    ListeUserComponent,
+    ViewUserComponent,
+    AddUserComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,7 +42,11 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
     HttpClientModule,
   ],
   providers: [
-    AuthServiceService
+    AuthServiceService,
+    UserServiceService,
+    AuthGuard,
+    { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
+
   ],
   bootstrap: [AppComponent]
 })
