@@ -8,14 +8,17 @@ import { ListeUserComponent } from './components/liste-user/liste-user.component
 import { ViewUserComponent } from './components/view-user/view-user.component';
 import { AddUserComponent } from './components/add-user/add-user.component';
 import { AuthGuard } from './helper/auth.guard';
+import { AddPartenaireComponent } from './components/add-partenaire/add-partenaire.component';
 
 
 const routes: Routes = [
+  { path: '', component: LoginComponent},
   {
     path: '', component: DefaultComponent,
     children: [
-     { path: 'dashboard', component: DashboardComponent },
-     { path: 'add_compte', component: AddCompteComponent },
+     { path: 'accueil', component: DashboardComponent },
+     { path: 'add_compte', component: AddCompteComponent},
+     { path: 'new_partenaire', component: AddPartenaireComponent},
      { path: 'liste_user', component: ListeUserComponent },
      { path: 'view_user/:id', component:  ViewUserComponent },
      { path: 'add_user', component:  AddUserComponent },
@@ -23,7 +26,7 @@ const routes: Routes = [
     ],
     canActivate: [AuthGuard]
   },
-  { path: 'login', component: LoginComponent}
+  { path: 'login', component: LoginComponent},
 ];
 
 @NgModule({

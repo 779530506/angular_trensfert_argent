@@ -20,9 +20,18 @@
         <span>Gestion User</span></a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" routerLink="/add_compte">
-        <i class="fas fa-fw fa-table"></i>
-        <span>Gestion compte</span></a>
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+       aria-expanded="true" aria-controls="collapseTwo">
+        <i class="fas fa-fw fa-cog"></i>
+        <span>Gestion compte</span>
+      </a>
+      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+          <h6 class="collapse-header">Creer un compte</h6>
+          <a class="collapse-item" routerLink="/add_compte">Nouveau partenaire</a>
+          <a class="collapse-item" routerLink="/new_partenaire">Partenaire existant</a>
+        </div>
+      </div>
     </li>
     <li class="nav-item">
       <a class="nav-link" routerLink="/dashboard">

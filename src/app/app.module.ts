@@ -19,6 +19,7 @@ import { AddCompteComponent } from './components/add-compte/add-compte.component
 import { ListeUserComponent } from './components/liste-user/liste-user.component';
 import { ViewUserComponent } from './components/view-user/view-user.component';
 import { AddUserComponent } from './components/add-user/add-user.component';
+import { AddPartenaireComponent } from './components/add-partenaire/add-partenaire.component';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import { AddUserComponent } from './components/add-user/add-user.component';
     ListeUserComponent,
     ViewUserComponent,
     AddUserComponent,
+    AddPartenaireComponent,
   ],
   imports: [
     BrowserModule,
