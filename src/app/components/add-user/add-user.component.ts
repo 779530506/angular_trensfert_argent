@@ -1,7 +1,7 @@
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthServiceService } from './../../authentification/auth-service.service';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { User } from 'src/app/modele/user';
 import { UserServiceService } from 'src/app/service/user-service.service';
 
@@ -15,6 +15,7 @@ export class AddUserComponent implements OnInit {
   roles: [];
   iri = `/api/roles/` ;
   user: User;
+  submitted = false;
 
   constructor(private fb: FormBuilder,
               private service: UserServiceService, private route: ActivatedRoute,
@@ -22,16 +23,16 @@ export class AddUserComponent implements OnInit {
    }
   ngOnInit() {
     this.formUser = this.fb.group({
-        nom: [],
-        prenom: [],
-        email: [],
-        adresse: [],
-        telephon: [],
-        dateNaissance: [],
-        username: [],
-        password: [],
-        isActive: [true],
-        role: [],
+      nom: ['', Validators.required],
+      prenom: ['', Validators.required],
+      email: ['',  [Validators.required, Validators.email]],
+      adresse: ['', Validators.required],
+      telephon: ['', [Validators.required, Validators.minLength(9)]],
+      dateNaissance: ['', Validators.required],
+      username: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(4)]],
+      isActive: [true],
+      role: ['', Validators.required],
         id: []
     });
 
@@ -66,7 +67,9 @@ export class AddUserComponent implements OnInit {
       }
     });
   }
+  get f() { return this.formUser.controls; }
   onAdd() {
+    this.submitted = true;
     // recuperons les valeurs du formulaire
     const user = {
       username : this.formUser.value.username,

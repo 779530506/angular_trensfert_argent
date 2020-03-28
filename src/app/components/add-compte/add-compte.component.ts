@@ -132,7 +132,6 @@ idPartenaire: number;
      password: ['', [Validators.required, Validators.minLength(4)]],
      isActive: [true],
      role: ['', Validators.required],
-     id: []
     });
   }
   get f() { return this.formCompte.controls; }
