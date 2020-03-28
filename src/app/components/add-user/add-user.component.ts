@@ -37,7 +37,6 @@ export class AddUserComponent implements OnInit {
 
     this.service.getRoles().subscribe(
       data => {
-        console.log(data);
         this.roles = data['hydra:member'];
       }
     );

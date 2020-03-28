@@ -15,6 +15,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { InterceptorService } from './helper/interceptor.service';
 import { AuthGuard } from './helper/auth.guard';
 import { UserServiceService } from './service/user-service.service';
+import { PartenaireServiceService } from './service/partenaire-service.service';
+import { CompteService } from './service/compte.service';
 import { AddCompteComponent } from './components/add-compte/add-compte.component';
 import { ListeUserComponent } from './components/liste-user/liste-user.component';
 import { ViewUserComponent } from './components/view-user/view-user.component';
@@ -47,6 +49,8 @@ import { AddPartenaireComponent } from './components/add-partenaire/add-partenai
     AuthServiceService,
     UserServiceService,
     AuthGuard,
+    PartenaireServiceService,
+    CompteService,
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
 
   ],

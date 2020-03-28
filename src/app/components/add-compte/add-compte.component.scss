@@ -11,3 +11,11 @@ legend.scheduler-border {
     font-weight: bold !important;
     text-align: left !important;
 }
+span .erreur {
+    color: red;
+    background-color: red;
+}
+
+.ng-valid:not(form){
+    border-left: 4px solid green;
+}

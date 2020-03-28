@@ -16,6 +16,9 @@ export class UserServiceService {
     return this.httpClient.get<Role>(`${environment.apiUrl}/api/roles`);
    }
 
+   getRole(libelle: string) {
+    return this.httpClient.get<Role>(`${environment.apiUrl}/api/roles?libelle=${libelle}`);
+   }
    getUsers() {
    return this.httpClient.get<User>(`${environment.apiUrl}/api/users`);
   }
@@ -34,6 +37,10 @@ export class UserServiceService {
    deleteUser(user) {
     // tslint:disable-next-line: align
     return this.httpClient.delete(`${environment.apiUrl}/api/users/${user.id}`);
+   }
+   deleteById(id: number) {
+    // tslint:disable-next-line: align
+    return this.httpClient.delete(`${environment.apiUrl}/api/users/${id}`);
    }
    getStatus(id)
    {
