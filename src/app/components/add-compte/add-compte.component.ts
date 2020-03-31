@@ -14,9 +14,11 @@ import { User } from 'src/app/modele/user';
 })
 export class AddCompteComponent implements OnInit {
 formCompte: FormGroup;
+numeroCompte: string;
 iri = `/api/roles/`;
 iri1 = `/api/users/`;
 iri2 = `/api/partenaires/`;
+success: boolean;
 error = false;
 message: string;
 submitted = false;
@@ -41,6 +43,9 @@ idPartenaire: number;
   }
   onSubmit() {
     this.submitted = true;
+    if(this.formCompte.invalid){
+      return ;
+    }
     this.addUser();
 
   }
@@ -68,7 +73,7 @@ idPartenaire: number;
         error => {
         this.error = true;
         console.log(error);
-        this.message = "erreur sur les informations personnelles  \n NB: username doit etre unique";
+        this.message = "erreur sur l'utilisateur";
               }
         );
   }
@@ -104,7 +109,11 @@ idPartenaire: number;
     this.compteService.postCompte(compte).subscribe(
       data => {
         console.log(data);
-        this.router.navigate(['/accueil']);
+        this.numeroCompte = data['numeroCompte'];
+        this.success = true;
+        this.submitted = false;
+        this.error = false;
+        this.createForm();
        },
        error => {
         this.error = true;
@@ -135,5 +144,11 @@ idPartenaire: number;
     });
   }
   get f() { return this.formCompte.controls; }
+  setSuccess(){
+    this.success = false;
+  }
+  setCouleur(color: string) {
+    return  color;
+  }
 
 }

@@ -1,5 +1,19 @@
 <h2>Creation de compte</h2>
 <div  *ngIf="error" class="alert alert-danger" >{{message}}  </div>
+                                         <!-- si le compte est ok -->
+                                         <div [style.display]="success ? 'block' : 'none'" class="modal">
+                                          <div class="modal-dialog modal-md  ">
+                                            <div class="modal-content">
+                                              <div class="modal-body">
+                                                <p [style.color]="setCouleur('green')" class="alert alert-success">
+                                                   Compte enregistre avec succés ! <br> votre compte est: {{numeroCompte}}</p>            
+                                                <button type="button" class="btn btn-success" data-dismiss="modal"
+                                                 (click) = "setSuccess()">Close</button>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <!-- fin  -->
 <form [formGroup]="formCompte" (ngSubmit)="onSubmit()" >
   <div class="row">
      <div class="col-md-4"> 
@@ -8,7 +22,7 @@
 <div class="form-group  offset-md-1">
   <input type="number"   class="form-control" formControlName="solde" [ngClass]="{ 'is-invalid': submitted && f.solde.errors }"
    aria-describedby="helpId" placeholder="Solde" >
-   <div *ngIf="submitted && f.solde.errors" class="invalid-feedback alert alert-danger">
+   <div *ngIf="submitted && f.solde.errors" class="invalid-feedback ">
     <div *ngIf="f.solde.errors.required">solde is required</div>
     <div *ngIf="f.solde.errors.min "> la solde doit etre superieur  ou égale 500 000 </div>
     <div *ngIf="f.solde.errors.max "> la solde doit etre inferieur ou égale à 2 000 000 </div>
@@ -19,7 +33,7 @@
   <input type="text"
     class="form-control" formControlName="ninea" name="" id="" aria-describedby="helpId"
      placeholder="ninea" [ngClass]="{ 'is-invalid': submitted && f.ninea.errors }">
-     <div *ngIf="submitted && f.ninea.errors" class="invalid-feedback alert alert-danger">
+     <div *ngIf="submitted && f.ninea.errors" class="invalid-feedback ">
       <div *ngIf="f.ninea.errors.required">obligatoire</div>
       <div *ngIf="f.ninea.errors.minlength">ninea minimum 10 caractères</div>
     </div>
@@ -28,7 +42,7 @@
     <input type="text"
       class="form-control" required formControlName="registreDuCommerce" name="" id=""
        aria-describedby="helpId" placeholder="registre du commerce" [ngClass]="{ 'is-invalid': submitted && f.registreDuCommerce.errors }">
-       <div *ngIf="submitted && f.registreDuCommerce.errors" class="invalid-feedback alert alert-danger">
+       <div *ngIf="submitted && f.registreDuCommerce.errors" class="invalid-feedback ">
         <div *ngIf="f.registreDuCommerce.errors.required">obligatoire</div>
         <div *ngIf="f.registreDuCommerce.errors.minlength">registre minimum 10 caractères</div>
       </div>
@@ -45,14 +59,14 @@
   <div class="form-group col-md-6">
    <input type="text" class="form-control" placeholder="Nom" id="nom" required formControlName="nom" 
    [ngClass]="{ 'is-invalid': submitted && f.nom.errors }">
-   <div *ngIf="submitted && f.nom.errors" class="invalid-feedback alert alert-danger">
+   <div *ngIf="submitted && f.nom.errors" class="invalid-feedback ">
     <div *ngIf="f.nom.errors.required">obligatoire</div>
   </div>
  </div>
  <div class="form-group col-md-6">
    <input type="text" class="form-control" id="prenom"  formControlName="prenom" 
     placeholder="prenom" [ngClass]="{ 'is-invalid': submitted && f.prenom.errors }">
-    <div *ngIf="submitted && f.prenom.errors" class="invalid-feedback alert alert-danger">
+    <div *ngIf="submitted && f.prenom.errors" class="invalid-feedback ">
       <div *ngIf="f.prenom.errors.required">  obligatoire</div>
   </div>
  </div>
@@ -61,7 +75,7 @@
 <div class="form-group col-md-6 ">
  <input type="text" class="form-control" id="adresse"  formControlName="adresse" 
  placeholder="adresse" [ngClass]="{ 'is-invalid': submitted && f.adresse.errors }">
- <div *ngIf="submitted && f.adresse.errors" class="invalid-feedback alert alert-danger">
+ <div *ngIf="submitted && f.adresse.errors" class="invalid-feedback ">
   <div *ngIf="f.adresse.errors.required">obligatoire</div>
 </div>
 </div>
@@ -69,7 +83,7 @@
  <input type="text" class="form-control" id="telephon"  formControlName="telephon" 
   [ngClass]="{ 'is-invalid': submitted && f.telephon.errors }"
  placeholder="telephon">
- <div *ngIf="submitted && f.telephon.errors" class="invalid-feedback alert alert-danger">
+ <div *ngIf="submitted && f.telephon.errors" class="invalid-feedback ">
   <span *ngIf="f.telephon.errors.minlength"> le telephon doit avoir 9 caracteres</span>
   <span *ngIf="f.telephon.errors.required">obligatoire</span>
 </div>
@@ -79,7 +93,7 @@
 <div class="form-group col-md-8">
    <input type="email" class="form-control" id="email"  formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
    placeholder="email">
-   <div *ngIf="submitted && f.email.errors" class="invalid-feedback alert alert-danger">
+   <div *ngIf="submitted && f.email.errors" class="invalid-feedback ">
     <div *ngIf="f.email.errors.required">obligatoire</div>
     <div *ngIf="f.email.errors.email">le mail doit etre valide</div>
   </div>
@@ -91,7 +105,7 @@
        <input type="date" placeholder="Date de naissance" class="form-control"  
        formControlName="dateNaissance" [ngClass]="{ 'is-invalid': submitted && f.dateNaissance.errors }" 
        id="dateNaissance">
-       <div *ngIf="submitted && f.dateNaissance.errors" class="invalid-feedback alert alert-danger">
+       <div *ngIf="submitted && f.dateNaissance.errors" class="invalid-feedback ">
         <div *ngIf="f.dateNaissance.errors.required">obligatoire</div>
       </div>
      </div>
@@ -101,7 +115,7 @@
             <option  *ngFor="let role of roles"
             [value]="role.id" >{{ role.libelle }}</option> 
          </select>
-         <div *ngIf="submitted && f.role.errors" class="invalid-feedback alert alert-danger">
+         <div *ngIf="submitted && f.role.errors" class="invalid-feedback ">
           <div *ngIf="f.role.errors.required">obligatoire</div>
         </div>
        </div>
@@ -115,14 +129,14 @@
    <div class="form-group col-md-6">
        <input type="text" placeholder="Username" class="form-control" formControlName="username"
         id="username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }"  >
-        <div *ngIf="submitted && f.username.errors" class="invalid-feedback alert alert-danger">
+        <div *ngIf="submitted && f.username.errors" class="invalid-feedback ">
           <div *ngIf="f.username.errors.required">obligatoire</div>
         </div>
      </div>
      <div class="form-group col-md-6 ">
          <input type="password" placeholder="Password" class="form-control" id="pwd"  
          formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" >
-       <div *ngIf="submitted && f.password.errors" class="invalid-feedback alert alert-danger">
+       <div *ngIf="submitted && f.password.errors" class="invalid-feedback ">
           <div *ngIf="f.password.errors.required">obligatoire</div>
           <div *ngIf="f.password.errors.minlength">Password minimum 4 caracteres</div>
       </div>

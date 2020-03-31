@@ -24,6 +24,7 @@ import { AddUserComponent } from './components/add-user/add-user.component';
 import { AddPartenaireComponent } from './components/add-partenaire/add-partenaire.component';
 import { CompteComponent } from './components/compte/compte.component';
 import { ListeCompteComponent } from './components/liste-compte/liste-compte.component';
+import { AddDepotComponent } from './components/add-depot/add-depot.component';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import { ListeCompteComponent } from './components/liste-compte/liste-compte.com
     AddPartenaireComponent,
     CompteComponent,
     ListeCompteComponent,
+    AddDepotComponent,
   ],
   imports: [
     BrowserModule,

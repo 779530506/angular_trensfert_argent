@@ -12,7 +12,10 @@ import { CompteService } from 'src/app/service/compte.service';
 export class CompteComponent implements OnInit {
   formCompte: FormGroup;
   submitted = false;
+  noPartenaire: boolean;
+  success: boolean;
   partenaire: string;
+  numeroCompte: string;
     constructor(
       private fb: FormBuilder,
       private router: Router,
@@ -28,17 +31,20 @@ export class CompteComponent implements OnInit {
       console.log(ninea);
       this.partenaireService.getByNinea(this.formCompte.value.ninea).subscribe(
         data => {
+         const nbr = data["hydra:totalItems"];
+         if (nbr > 0) {
           this.partenaire = data["hydra:member"][0]['@id'];
           this.addCompte();
-         // console.log(data["hydra:member"][0]['@id']);
+         } else {
+           this.noPartenaire =  true;
+         }
+
         },
         error => {
           console.log(error);
         }
       );
-      //if (!this.idPartenaire >= 1 ) {
-        //this.addCompte();
-     // }
+
     }
 
   // creation du partenaire
@@ -52,7 +58,11 @@ export class CompteComponent implements OnInit {
       this.compteService.postCompte(compte).subscribe(
         data => {
           console.log(data);
-          this.router.navigate(['/liste_compte']);
+          this.numeroCompte = data['numeroCompte'];
+          this.success = true;
+          this.submitted = false;
+          this.createForm();
+         // this.router.navigate(['/liste_compte']);
          },
          error => {
           console.log(error);
@@ -67,4 +77,13 @@ export class CompteComponent implements OnInit {
       });
     }
     get f() { return this.formCompte.controls; }
+    setNoPartenaire() {
+      this.noPartenaire = false;
+    }
+    setCouleur(color: string) {
+      return  color;
+    }
+    setSuccess(){
+      this.success = false;
+    }
 }

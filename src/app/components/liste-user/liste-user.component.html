@@ -11,10 +11,10 @@
               <div class="modal-body">
                 <!-- si l'utilisateur ne peut pas être supprimé  -->
                 <div *ngIf="contrainte" [style.display]="contrainte ? 'block' : 'none'" class="modal">
-                  <div class="modal-dialog modal-md modal-lg ">
+                  <div class="modal-dialog ">
                     <div class="modal-content">
                       <div class="modal-body">
-                        <p [style.color]="setCouleur('red')">
+                        <p [style.color]="setCouleur('red')" class="alert alert-danger">
                            Impossible de supprimer, cet utilisateur est lié à d'autre table </p>            
                         <button type="button" class="btn btn-danger" data-dismiss="modal" (click) = "setContrainte()">Close</button>
                       </div>
@@ -80,10 +80,10 @@
       <!-- si username existe -->
       <div class="modal-body">
         <div *ngIf="erreur" [style.display]="erreur ? 'block' : 'none'" class="modal">
-          <div class="modal-dialog modal-md modal-lg ">
+          <div class="modal-dialog modal-sm ">
             <div class="modal-content">
               <div class="modal-body">
-                <p [style.color]="setCouleur('red')"> Attention!  username doit être unique </p>            
+                <p [style.color]="setCouleur('red')" class="alert alert-danger"> Attention!  username doit être unique </p>            
                 <button type="button" class="btn btn-danger" data-dismiss="modal" (click) = "setErreur()">Close</button>
               </div>
             </div>
