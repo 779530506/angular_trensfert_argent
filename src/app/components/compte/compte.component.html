@@ -1,0 +1,28 @@
+<h2>Création de compte d'un  partenaire existant</h2>
+<div class="offset-md-2 col-md-8">
+<form [formGroup]="formCompte" (ngSubmit)="onSubmit()">
+    <fieldset class="scheduler-border">
+        <legend class="scheduler-border"></legend><br>
+      <div class="form-group  offset-md-1">
+        <input type="number"   class="form-control" formControlName="solde" [ngClass]="{ 'is-invalid': submitted && f.solde.errors }"
+         aria-describedby="helpId" placeholder="Solde" >
+         <div *ngIf="submitted && f.solde.errors" class="invalid-feedback alert alert-danger">
+          <div *ngIf="f.solde.errors.required">solde is required</div>
+          <div *ngIf="f.solde.errors.min "> la solde doit etre superieur  ou égale 500 000 </div>
+          <div *ngIf="f.solde.errors.max "> la solde doit etre inferieur ou égale à 2 000 000 </div>
+        </div>
+      </div>
+      <!-- information du partenaire -->
+      <div class="form-group  offset-md-1">
+        <input type="text"
+          class="form-control" formControlName="ninea" name="" id="" aria-describedby="helpId"
+           placeholder="ninea" [ngClass]="{ 'is-invalid': submitted && f.ninea.errors }">
+           <div *ngIf="submitted && f.ninea.errors" class="invalid-feedback alert alert-danger">
+            <div *ngIf="f.ninea.errors.required">obligatoire</div>
+            <div *ngIf="f.ninea.errors.minlength">ninea minimum 10 caractères</div>
+          </div>
+        </div>
+      </fieldset>
+      <button type="submit"  class="btn btn-primary btn-block ">Enregistrer</button>
+</form>
+</div>

@@ -9,6 +9,8 @@ import { ViewUserComponent } from './components/view-user/view-user.component';
 import { AddUserComponent } from './components/add-user/add-user.component';
 import { AuthGuard } from './helper/auth.guard';
 import { AddPartenaireComponent } from './components/add-partenaire/add-partenaire.component';
+import { CompteComponent } from './components/compte/compte.component';
+import { ListeCompteComponent } from './components/liste-compte/liste-compte.component';
 
 
 const routes: Routes = [
@@ -18,7 +20,8 @@ const routes: Routes = [
     children: [
      { path: 'accueil', component: DashboardComponent },
      { path: 'add_compte', component: AddCompteComponent},
-     { path: 'new_partenaire', component: AddPartenaireComponent},
+     { path: 'create_compte', component: CompteComponent},
+     { path: 'liste_compte', component: ListeCompteComponent},
      { path: 'liste_user', component: ListeUserComponent },
      { path: 'view_user/:id', component:  ViewUserComponent },
      { path: 'add_user', component:  AddUserComponent },

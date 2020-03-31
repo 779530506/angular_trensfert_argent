@@ -13,4 +13,10 @@ export class CompteService {
   postCompte(compte: Compte) {
           return  this.http.post(`${environment.apiUrl}/api/comptes`, compte);
    }
+   getComptes() {
+    return  this.http.get(`${environment.apiUrl}/api/comptes`);
+   }
+   deleteCompte(id: number){
+    return  this.http.delete(`${environment.apiUrl}/api/comptes/${id}`);
+   }
 }

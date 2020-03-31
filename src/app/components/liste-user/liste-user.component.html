@@ -1,8 +1,199 @@
 <div *ngIf="users"  class="row">
     <h2>Liste des utlisateurs</h2>
     <div class="row offset-md-10">
-        <a routerLink="/add_user"  class="btn btn-success  col ">add user</a>
-        </div><br>
+        <a (click)="show()"  class="btn btn-outline-success  col "> 
+          <i class="fas fa-user-plus"></i> </a>
+        </div>
+        <!-- si le view est actif -->
+        <div *ngIf="view"  [style.display]="view ? 'block' : 'none'" class="modal">
+          <div class="modal-dialog modal-lg ">
+            <div class="modal-content">
+              <div class="modal-body">
+                <!-- si l'utilisateur ne peut pas être supprimé  -->
+                <div *ngIf="contrainte" [style.display]="contrainte ? 'block' : 'none'" class="modal">
+                  <div class="modal-dialog modal-md modal-lg ">
+                    <div class="modal-content">
+                      <div class="modal-body">
+                        <p [style.color]="setCouleur('red')">
+                           Impossible de supprimer, cet utilisateur est lié à d'autre table </p>            
+                        <button type="button" class="btn btn-danger" data-dismiss="modal" (click) = "setContrainte()">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- fin  -->
+                <div class="view">
+                        <div class="card   bg-light mb-3">
+                          <div class="card-header">
+                            Information supplémentaire
+                          </div>
+                          <div class="card-body">
+                            <div class="card-text">
+                     <table class="table table-bordered">
+                      <tbody>
+                          <tr>
+                              <td scope="row">Etat du compte</td>
+                              <td *ngIf="utilisateur.isActive==true">Activé</td>
+                              <td *ngIf="utilisateur.isActive==false">Desactivé</td>
+                          </tr>
+                          <tr>
+                              <td>Role</td>
+                              <td>{{utilisateur.roles[0]}}</td>
+                          </tr>
+                          <tr>
+                              <td scope="row">Date de naissance</td>
+                              <td>{{utilisateur.dateNaissance | date: 'dd/MM/yyyy'}}</td>
+                          </tr>
+                          <tr>
+                              <td>Adresse</td>
+                              <td>{{utilisateur.adresse}}</td>
+                           </tr>
+                           <tr>
+                                  <td>Username</td>
+                                  <td>{{utilisateur.username}}</td>
+                           </tr>
+                      </tbody>
+                  </table>
+                            </div>
+                <a  (click)='onDelete(utilisateur)' class="btn btn-danger">Supprimer</a>
+              </div>
+            </div>
+
+              </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-dark" data-dismiss="modal" (click) = "hideView()">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- fin -->
+
+         <!-- Creates the bootstrap modal where the image will appear -->
+
+  <div [style.display]="showModal ? 'block' : 'none'" class="modal">
+  <div class="modal-dialog modal-md modal-lg ">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Créer un utilisateur</h4>
+      </div>
+      <!-- si username existe -->
+      <div class="modal-body">
+        <div *ngIf="erreur" [style.display]="erreur ? 'block' : 'none'" class="modal">
+          <div class="modal-dialog modal-md modal-lg ">
+            <div class="modal-content">
+              <div class="modal-body">
+                <p [style.color]="setCouleur('red')"> Attention!  username doit être unique </p>            
+                <button type="button" class="btn btn-danger" data-dismiss="modal" (click) = "setErreur()">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <form [formGroup]="formUser">
+            <div class="">
+        <div class="form-row">
+          <div class="form-group col-md-4">
+           <input type="text" class="form-control" placeholder="Nom" id="nom"  formControlName="nom" 
+           [ngClass]="{ 'is-invalid': submitted && f.nom.errors }">
+           <div *ngIf="submitted && f.nom.errors" class="invalid-feedback ">
+            <div *ngIf="f.nom.errors.required">obligatoire</div>
+          </div>
+         </div>
+         <div class="form-group col-md-4">
+           <input type="text" class="form-control" id="prenom"  formControlName="prenom" 
+            placeholder="prenom" [ngClass]="{ 'is-invalid': submitted && f.prenom.errors }">
+            <div *ngIf="submitted && f.prenom.errors" class="invalid-feedback ">
+              <div *ngIf="f.prenom.errors.required">  obligatoire</div>
+          </div>
+         </div>
+          <div class="form-group col-md-4 ">
+            <input type="text" class="form-control" id="adresse"  formControlName="adresse" 
+            placeholder="adresse" [ngClass]="{ 'is-invalid': submitted && f.adresse.errors }">
+            <div *ngIf="submitted && f.adresse.errors" class="invalid-feedback ">
+             <div *ngIf="f.adresse.errors.required">obligatoire</div>
+           </div>
+           </div>
+         </div>
+        <div class="form-row">
+      
+        <div class="form-group col">
+         <input type="text" class="form-control" id="telephon"  formControlName="telephon" 
+          [ngClass]="{ 'is-invalid': submitted && f.telephon.errors }"
+         placeholder="telephon">
+         <div *ngIf="submitted && f.telephon.errors" class="invalid-feedback ">
+          <span *ngIf="f.telephon.errors.minlength"> le telephon doit avoir 9 caracteres</span>
+          <span *ngIf="f.telephon.errors.required">obligatoire</span>
+        </div>
+        </div>
+        <div class="form-group col">
+          <input type="email" class="form-control" id="email"  formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
+          placeholder="email">
+          <div *ngIf="submitted && f.email.errors" class="invalid-feedback ">
+           <div *ngIf="f.email.errors.required">obligatoire</div>
+           <div *ngIf="f.email.errors.email">le mail doit etre valide</div>
+         </div>
+        </div>
+        </div>
+        <div class="form-row">
+
+        </div>    
+        <div class="form-row">
+           <div class="form-group col-md-4">
+            <label>Date de naissanse</label>
+               <input type="date" placeholder="Date de naissance" class="form-control"  
+               formControlName="dateNaissance" [ngClass]="{ 'is-invalid': submitted && f.dateNaissance.errors }" 
+               id="dateNaissance">
+               <div *ngIf="submitted && f.dateNaissance.errors" class="invalid-feedback ">
+                <div *ngIf="f.dateNaissance.errors.required">obligatoire</div>
+              </div>
+             </div>
+             <div class="form-group col-md-4">
+                 <label for="specialite" >Role</label>
+                 <select  class="form-control" formControlName="role" [ngClass]="{ 'is-invalid': submitted && f.role.errors }">
+                    <option  *ngFor="let role of roles"
+                    [value]="role.id" >{{ role.libelle }}</option> 
+                 </select>
+                 <div *ngIf="submitted && f.role.errors" class="invalid-feedback ">
+                  <div *ngIf="f.role.errors.required">obligatoire</div>
+                </div>
+               </div>
+          <div class="form-group offset-md-1">
+             <label>Compte actif</label>
+             <input type="checkbox" class="form-control"  formControlName="isActive" 
+             [ngClass]="{ 'is-invalid': submitted && f.isActive.errors }">
+           </div>
+        </div> 
+        <div class="form-row">
+           <div class="form-group col-md-6">
+               <input type="text" placeholder="Username" class="form-control" formControlName="username"
+                id="username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }"  >
+                <div *ngIf="submitted && f.username.errors" class="invalid-feedback ">
+                  <div *ngIf="f.username.errors.required">obligatoire</div>
+                </div>
+             </div>
+             <div class="form-group col-md-6 ">
+                 <input type="password" placeholder="Password" class="form-control" id="pwd"  
+                 formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" >
+               <div *ngIf="submitted && f.password.errors" class="invalid-feedback ">
+                  <div *ngIf="f.password.errors.required">obligatoire</div>
+                  <div *ngIf="f.password.errors.minlength">Password minimum 4 caracteres</div>
+              </div>
+               </div>
+        </div>
+        </div>
+ <button (click)="onSubmit()"  class="btn btn-primary btn-block">Enregistrer</button>
+                        </form>
+    
+ </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-dark" data-dismiss="modal" (click) = "hide()">Close</button>
+      </div>
+    </div>
+  </div>
+  </div>
+
+
          <div class="row">
        <table class="table table-striped table-responsive">
            <thead class="thead">
@@ -23,14 +214,17 @@
                    <td scope="row">{{user.telephon}}</td>
                    <td scope="row">{{user.email}}</td>
                    <td *ngIf="user.isActive===true; else elseBlock">
-                       <button (click)="onStatus(user.id)" class="btn btn-success">
-                       On</button>
+                       <button (click)="onStatus(user.id)" class="btn btn-outline-success ">
+                        <i class="fas fa-toggle-on"></i></button>
                     </td>
                     <ng-template #elseBlock>
-                        <td><button  (click)="onStatus(user.id)" class="btn btn-danger">Of</button></td> 
+                        <td><button  (click)="onStatus(user.id)" class="btn btn-outline-danger">
+                            <i class="fas fa-toggle-off"></i>
+                        </button></td> 
                         </ng-template>
-                   <td><a [routerLink]="['/edit_user', user.id]"  class="btn btn-success"> Edit</a></td>
-                   <td><a [routerLink]="['/view_user', user.id]" class="btn btn-primary"> View</a></td>
+                   <td><a (click)="edit(user)"  class="btn btn-outline-success">  
+                     <i class="fas fa-user-edit"></i>  </a></td>
+                   <td><a (click)="afficher(user)" class="btn btn-outline-primary">   <i class="fas fa-eye"></i>  </a></td>
                </tr>
 
            </tbody>
