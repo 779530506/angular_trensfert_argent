@@ -1,0 +1,29 @@
+fieldset.scheduler-border {
+    border: 1px groove #ddd !important;
+    padding: 0 1.4em 1.4em 1.4em !important;
+    margin: 0 0 1.5em 0 !important;
+    -webkit-box-shadow:  0px 0px 0px 0px #400;
+            box-shadow:  2px 4px 2px 0px #999;
+   
+}
+
+legend.scheduler-border {
+    font-size: 1.2em !important;
+    font-weight: bold !important;
+    text-align: left !important;
+}
+span .erreur {
+    color: red;
+    background-color: red;
+}
+
+.ng-valid:not(form){
+    border-left: 4px solid green;
+}
+// .depot{
+//     height: 100px;
+//     background-image: url("../../../assets/img/depot1.jpeg");   
+//     background-repeat:no-repeat;
+//     //background-position:center right calc(4.375em + 4.1875rem);
+//    // background-size:calc(.75em + .375rem) calc(.75em + .375rem);
+// }

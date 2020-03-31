@@ -1,0 +1,72 @@
+<h2>Faire un dépot</h2>
+<div class="offset-md-2 col-md-8 ">
+<form [formGroup]="formDepot" (ngSubmit)="onSubmit()">
+  <!-- <img class="col-md-12" src="../../../assets/img/depot.jpeg" alt=""> -->
+                    <!-- si le compte nexiste pas -->
+                    <div [style.display]="noCompte ? 'block' : 'none'" class="modal">
+                      <div class="modal-dialog modal-md  ">
+                        <div class="modal-content">
+                          <div class="modal-body">
+                            <p [style.color]="setCouleur('red')" class="alert alert-danger">
+                               Désolé ce compte n'existe pas !</p>            
+                            <button type="button" class="btn btn-danger" data-dismiss="modal"
+                             (click) = "setNoCompte()">Close</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- fin  -->
+                                        <!-- si le depot est ok -->
+                                        <div [style.display]="success ? 'block' : 'none'" class="modal">
+                                          <div class="modal-dialog modal-md  ">
+                                            <div class="modal-content">
+                                              <div class="modal-body">
+                                                <p [style.color]="setCouleur('green')"  class="alert alert-success">
+                                                   Dépot enregistre avec succés !</p>            
+                                                <button type="button" class="btn btn-success" data-dismiss="modal"
+                                                 (click) = "setSuccess()">Close</button>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <!-- fin  -->
+                              
+                      <!-- pour limiter le solde lors du depot -->
+                      <div [style.display]="limit ? 'block' : 'none'" class="modal">
+                        <div class="modal-dialog modal-md  ">
+                          <div class="modal-content">
+                            <div class="modal-body">
+                              <p [style.color]="setCouleur('red')" class="alert alert-danger">
+                                Le solde doit etre inférieur à 2 000 000.</p>            
+                              <button type="button" class="btn btn-danger" data-dismiss="modal"
+                               (click) = "setLimit()">Close</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- fin  -->                                    
+    <fieldset class="scheduler-border">
+        <legend class="scheduler-border"></legend><br>
+      <div class="form-group  offset-md-1">
+        <input type="number"   class="form-control" formControlName="montant" [ngClass]="{ 'is-invalid': submitted && f.montant.errors }"
+         aria-describedby="helpId" placeholder="montant" >
+         <div *ngIf="submitted && f.montant.errors" class="invalid-feedback alert alert-danger">
+          <div *ngIf="f.montant.errors.required">montant is required</div>
+          <div *ngIf="f.montant.errors.min "> la montant doit etre superieur  ou égale 50 000 </div>
+          <div *ngIf="f.montant.errors.max "> la montant doit etre inferieur ou égale à 1 500 000 </div>
+        </div>
+      </div>
+      <!-- information du numeroCompte -->
+      <div class="form-group  offset-md-1">
+        <input type="text"
+          class="form-control" formControlName="numeroCompte" name="" id="" aria-describedby="helpId"
+           placeholder="numeroCompte" [ngClass]="{ 'is-invalid': submitted && f.numeroCompte.errors }">
+           <div *ngIf="submitted && f.numeroCompte.errors" class="invalid-feedback alert alert-danger">
+            <div *ngIf="f.numeroCompte.errors.required">obligatoire</div>
+            <div *ngIf="f.numeroCompte.errors.minlength">numeroCompte doit avoir 9 caractères</div>
+          </div>
+        </div>
+      </fieldset>
+      <button type="submit"  class="btn btn-primary btn-block ">Enregistrer</button>
+</form>
+</div>

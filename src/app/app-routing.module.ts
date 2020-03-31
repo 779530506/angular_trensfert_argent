@@ -11,6 +11,7 @@ import { AuthGuard } from './helper/auth.guard';
 import { AddPartenaireComponent } from './components/add-partenaire/add-partenaire.component';
 import { CompteComponent } from './components/compte/compte.component';
 import { ListeCompteComponent } from './components/liste-compte/liste-compte.component';
+import { AddDepotComponent } from './components/add-depot/add-depot.component';
 
 
 const routes: Routes = [
@@ -24,7 +25,7 @@ const routes: Routes = [
      { path: 'liste_compte', component: ListeCompteComponent},
      { path: 'liste_user', component: ListeUserComponent },
      { path: 'view_user/:id', component:  ViewUserComponent },
-     { path: 'add_user', component:  AddUserComponent },
+     { path: 'add_depot', component:  AddDepotComponent },
      { path: 'edit_user/:id', component:  AddUserComponent },
     ],
     canActivate: [AuthGuard]

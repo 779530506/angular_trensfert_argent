@@ -19,4 +19,7 @@ export class CompteService {
    deleteCompte(id: number){
     return  this.http.delete(`${environment.apiUrl}/api/comptes/${id}`);
    }
+   getByNumeroCompte(numero: string) {
+    return  this.http.get(`${environment.apiUrl}/api/comptes?numeroCompte=${numero}`);
+   }
 }

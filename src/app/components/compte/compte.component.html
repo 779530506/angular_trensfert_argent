@@ -1,5 +1,33 @@
 <h2>Création de compte d'un  partenaire existant</h2>
 <div class="offset-md-2 col-md-8">
+                                         <!-- si le compte est ok -->
+                                         <div [style.display]="success ? 'block' : 'none'" class="modal">
+                                          <div class="modal-dialog modal-md  ">
+                                            <div class="modal-content">
+                                              <div class="modal-body">
+                                                <p [style.color]="setCouleur('green')" class="alert alert-success">
+                                                   Compte enregistre avec succés ! <br> votre numéro compte est: {{numeroCompte}}</p>            
+                                                <button type="button" class="btn btn-success" data-dismiss="modal"
+                                                 (click) = "setSuccess()">Close</button>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <!-- fin  -->
+             <!-- si le compte nexiste pas -->
+             <div [style.display]="noPartenaire ? 'block' : 'none'" class="modal">
+              <div class="modal-dialog modal-md  ">
+                <div class="modal-content">
+                  <div class="modal-body">
+                    <p [style.color]="setCouleur('red')">
+                       Désolé ce partenaire n'existe pas !</p>            
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"
+                     (click) = "setNoPartenaire()">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- fin  -->
 <form [formGroup]="formCompte" (ngSubmit)="onSubmit()">
     <fieldset class="scheduler-border">
         <legend class="scheduler-border"></legend><br>
