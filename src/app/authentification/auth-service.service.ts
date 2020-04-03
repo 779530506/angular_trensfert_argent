@@ -26,15 +26,18 @@ export class AuthServiceService {
     return this.http.post<User>(`${environment.apiUrl}/api/login_check`, user).
      // tslint:disable-next-line: no-shadowed-variable
      pipe(map(data => {
-       console.log(data);
-       //const decode = jwt_decode(data.token);
-       //localStorage.setItem('roles', JSON.stringify(decode.role));
-       localStorage.setItem('user', JSON.stringify(user));
+      // console.log(data);
+       localStorage.setItem('username', JSON.stringify(user.username));
        localStorage.setItem('currentUser', JSON.stringify(data));
-      // console.log(decode);
       // tslint:disable-next-line: align
       this.currentUserSubject.next(data);
        return user;
    }));
+  }
+  logout() {
+    localStorage.clear();
+  }
+  getUsername() {
+    return JSON.parse(localStorage.getItem('username'));
   }
 }

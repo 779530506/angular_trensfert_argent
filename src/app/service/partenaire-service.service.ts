@@ -25,4 +25,8 @@ export class PartenaireServiceService {
    getByNinea(ninea: string) {
       return this.http.get(`${environment.apiUrl}/api/partenaires?ninea=${ninea}`);
    }
+  //  recuperation du partenaire
+  getUserPartenaire(username: string) {
+    return this.http.get(`${environment.apiUrl}/api/partenaires?userPartenaire.username=${username}`);
+  }
 }

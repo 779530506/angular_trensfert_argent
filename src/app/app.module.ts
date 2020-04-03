@@ -17,6 +17,7 @@ import { AuthGuard } from './helper/auth.guard';
 import { UserServiceService } from './service/user-service.service';
 import { PartenaireServiceService } from './service/partenaire-service.service';
 import { CompteService } from './service/compte.service';
+import { AffecterService } from './service/affecter.service';
 import { AddCompteComponent } from './components/add-compte/add-compte.component';
 import { ListeUserComponent } from './components/liste-user/liste-user.component';
 import { ViewUserComponent } from './components/view-user/view-user.component';
@@ -25,6 +26,8 @@ import { AddPartenaireComponent } from './components/add-partenaire/add-partenai
 import { CompteComponent } from './components/compte/compte.component';
 import { ListeCompteComponent } from './components/liste-compte/liste-compte.component';
 import { AddDepotComponent } from './components/add-depot/add-depot.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { AddAffecterComponent } from './component/add-affecter/add-affecter.component';
 
 
 @NgModule({
@@ -44,12 +47,14 @@ import { AddDepotComponent } from './components/add-depot/add-depot.component';
     CompteComponent,
     ListeCompteComponent,
     AddDepotComponent,
+    AddAffecterComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
+    NgxPaginationModule
   ],
   providers: [
     AuthServiceService,
@@ -57,6 +62,7 @@ import { AddDepotComponent } from './components/add-depot/add-depot.component';
     AuthGuard,
     PartenaireServiceService,
     CompteService,
+    AffecterService,
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
 
   ],

@@ -30,7 +30,6 @@ export class LoginComponent implements OnInit {
     };
     this.auth.getConnexion(user).subscribe(
       data => {
-        console.log(data);
         this.router.navigate(['/accueil']);
       },
       error => {

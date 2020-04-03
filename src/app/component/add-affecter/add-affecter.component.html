@@ -1,0 +1,50 @@
+<div class="row">
+    <h2>Centre d'affectation</h2>
+    <div *ngIf="error" class="alert alert-danger"><p> {{message}} </p> </div>
+    <div *ngIf="success" class="alert alert-success"><p> l'affectation est terminée avec success </p> </div>
+<form [formGroup]="formAffecter" class="offset-md-1 col-md-10" (ngSubmit)="onSubmit()">
+      <!-- date debut et fin -->
+      <div class="form-row">
+      <div class="form-group col ">
+        <label>Date du début</label>
+        <input type="date"  class="form-control"  
+        formControlName="dateDebut" [ngClass]="{ 'is-invalid': submitted && f.dateDebut.errors }" 
+        id="dateDebut">
+        </div>
+        <div class="form-group col ">
+            <label>Date du fin</label>
+            <input type="date"  class="form-control"  
+            formControlName="dateFin" [ngClass]="{ 'is-invalid': submitted && f.dateFin.errors }" 
+            id="dateFin">
+            </div>
+        </div>
+        <!-- fin -->
+        <!-- debut des select -->
+        <div class="form-row">
+        <div class="form-group col">
+            <label for="specialite" >compte à effecter</label>
+            <select  class="form-control" placeholder="compte à affecter" formControlName="compteAffecter" 
+            [ngClass]="{ 'is-invalid': submitted && f.compteAffecter.errors }">
+               <option  *ngFor="let compte of comptes"
+               [value]="compte['@id']" >{{ compte.numeroCompte }}</option> 
+            </select>
+             <div *ngIf="submitted && f.compteAffecter.errors" class="invalid-feedback alert alert-danger">
+             <div *ngIf="f.compteAffecter.errors.required">obligatoire</div>
+           </div> 
+          </div>
+          <div class="form-group col">
+            <label for="specialite" >choisir le user</label>
+            <select  class="form-control" formControlName="userAffecter" 
+            [ngClass]="{ 'is-invalid': submitted && f.userAffecter.errors }">
+               <option  *ngFor="let user of users"
+               [value]="user['@id']" >{{ user.username }}</option> 
+            </select>
+            <div *ngIf="submitted && f.userAffecter.errors" class="invalid-feedback alert alert-danger">
+             <div *ngIf="f.userAffecter.errors.required">obligatoire</div>
+           </div> 
+          </div>
+        </div>
+        <!-- fin -->
+      <button type="submit"  class="btn btn-primary btn-block ">Enregistrer</button>
+</form>
+</div>

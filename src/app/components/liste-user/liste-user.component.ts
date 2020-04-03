@@ -17,18 +17,32 @@ export class ListeUserComponent implements OnInit {
   submitted = false;
   erreur = false;
   formUser: FormGroup;
+  formRecherche: FormGroup;
   contrainte: boolean; // pour verifier si l'utisateur n'est pas supprimé
   roles: [];
   iri = `/api/roles/` ;
   user: User;
   utilisateur: User;
+  userFilter = "";
+
+
   constructor(private fb: FormBuilder, private userService: UserServiceService, private router: Router  ) { }
 
   ngOnInit() {
    this.getUser();
    this.createForm();
    this.getRole();
+   // recherche
+   this.formRecherche = this.fb.group({
+    userFilter: ['']
+   });
 
+  }
+  // pour filtrer
+  onFilter() { // without type info
+    this.userFilter = this.formRecherche.value.userFilter;
+    console.log(this.userFilter);
+    this.getUser();
   }
   getRole() {
     return  this.userService.getRoles().subscribe(
@@ -53,7 +67,7 @@ export class ListeUserComponent implements OnInit {
     });
   }
   getUser() {
-    return   this.userService.getUsers().subscribe(
+    return   this.userService.getUsers(this.userFilter).subscribe(
       data => {
         this.users = data["hydra:member"];
       },
@@ -80,7 +94,8 @@ export class ListeUserComponent implements OnInit {
              // tslint:disable-next-line: align
              this.userService.getUsers().subscribe(
               datas => {
-              this.users = datas["hydra:member"];
+              //this.users = datas["hydra:member"];
+              this.onFilter();
              },
             error => {
               console.log(error);

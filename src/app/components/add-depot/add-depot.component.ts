@@ -37,6 +37,7 @@ export class AddDepotComponent implements OnInit {
       this.compteService.getByNumeroCompte(numeroCompte).subscribe(
         data => {
           const nbr = data["hydra:totalItems"];
+          console.log(nbr);
           if (nbr > 0) {
             this.compte = data["hydra:member"][0]['@id'];
             this.addDepot();

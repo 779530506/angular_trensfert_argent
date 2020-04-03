@@ -6,3 +6,15 @@ span .erreur {
 .ng-valid:not(form){
     border-left: 4px solid green;
 }
+.recherche{
+    margin-bottom: 2%;
+}
+table thead{
+    background-color: teal;
+    color: white;
+    font-weight: bolder;
+    font-size: 1.1em;
+}
+table{
+    border-radius: 15px;
+}

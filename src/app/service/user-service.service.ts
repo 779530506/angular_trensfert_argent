@@ -19,8 +19,8 @@ export class UserServiceService {
    getRole(libelle: string) {
     return this.httpClient.get<Role>(`${environment.apiUrl}/api/roles?libelle=${libelle}`);
    }
-   getUsers() {
-   return this.httpClient.get<User>(`${environment.apiUrl}/api/users`);
+   getUsers(username?: string) {
+   return this.httpClient.get<User>(`${environment.apiUrl}/api/users?username=${username}`);
   }
    getUser(id: any): Observable<User> {
    return this.httpClient.get<User>(`${environment.apiUrl}/api/users/${id}`);
@@ -45,5 +45,13 @@ export class UserServiceService {
    getStatus(id)
    {
    return this.httpClient.get(`${environment.apiUrl}/api/users/status/${id}`);
+   }
+   /**
+    * 
+    * @param id on cherche les utilisateur de meme partenaire
+    */
+   getByIdPartenaire(id: number) {
+    // tslint:disable-next-line: align
+    return this.httpClient.get(`${environment.apiUrl}/api/users?partenaire.id=${id}`);
    }
 }

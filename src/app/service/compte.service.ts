@@ -16,7 +16,7 @@ export class CompteService {
    getComptes() {
     return  this.http.get(`${environment.apiUrl}/api/comptes`);
    }
-   deleteCompte(id: number){
+   deleteCompte(id: number) {
     return  this.http.delete(`${environment.apiUrl}/api/comptes/${id}`);
    }
    getByNumeroCompte(numero: string) {

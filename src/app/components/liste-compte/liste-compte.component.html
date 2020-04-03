@@ -1,8 +1,28 @@
-<div *ngIf="comptes"  class="row">
-    <h2>Liste des utlisateurs</h2>
-    <div class="row offset-md-10">
-        <a routerLink="/add_compte"  class="btn btn-success  col ">add compte</a>
-        </div><br>
+<div class="offset-md-1">
+    <h2>Liste des comptes</h2>
+        <!-- champ de recherche et d'ajout -->
+        <div class="row recherche">
+            <div class="">
+                  <form [formGroup]="formRecherche" (ngSubmit)="onFilter()" class="col d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" >
+                    <div class="input-group">
+                    <input type="text" formControlName="compteFilter"  class="form-control  bg-light border-0 small" placeholder="username..." 
+                    aria-label="Search" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                      <button class="btn btn-primary" type="submit">
+                        <i class="fas fa-search fa-sm"></i>
+                      </button> 
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="col"> 
+              <a routerLink="/add_compte"  class="btn btn-outline-success  offset-md-2 "> 
+                <i class="fas fa-user-plus"></i> nouveau partenaire </a>
+                <a routerLink="/create_compte"  class="btn btn-outline-primary  offset-md-2 "> 
+                  <i class="fas fa-user-plus"></i> partenaire existant</a>
+              </div>
+              </div>
+              <!-- fin -->
          <div class="row">
        <table class="table table-striped table-responsive">
            <thead class="thead">
@@ -13,27 +33,22 @@
                    <th>date de creation</th>
                    <th>Ninea</th>
                    <th>username</th>
-                   <th>Editer</th>
-                   <th>View</th>
                </tr>
            </thead>
            <tbody>
-               <tr *ngFor="let compte of comptes">
+               <tr *ngFor="let compte of comptes | paginate:{itemsPerPage: 5, currentPage: p }">
                    <td scope="row">{{compte.numeroCompte}}</td>
                    <td scope="row">{{compte.soldeInitiale}}</td>
                    <td scope="row">{{compte.solde}}</td>
                    <td scope="row">{{compte.createdDate | date: 'dd/MM/yyyy:HH:mm'}}</td>
                    <td scope="row">{{compte.partenaire.ninea}}</td>
                    <td scope="row">{{compte.partenaire.userPartenaire.username}}</td>
-                   <td><a [routerLink]="['/edit_compte', compte.id]"  class="btn btn-success"> 
-                    <i class="fas fa-user-edit"></i>
-                </a></td>
-                   <td><a (click)="onDelete(compte.id)" class="btn btn-outline-danger"><i class="far fa-trash-alt"></i></a></td>
                </tr>
 
            </tbody>
        </table>
+       <div id="pagination">
+        <pagination-controls (pageChange)="p=$event"></pagination-controls>
+      </div>  
          </div>
- 
-    
-</div>  
+        </div>
