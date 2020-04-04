@@ -10,7 +10,16 @@ export class AffecterService {
   constructor(
     private http: HttpClient,
   ) { }
-  postCompte(affecter: Affecter) {
+  postAffecter(affecter: Affecter) {
      return  this.http.post(`${environment.apiUrl}/api/affecters`, affecter);
     }
-  }
+  getAffecter() {
+      return  this.http.get(`${environment.apiUrl}/api/affecters`);
+     }
+  getAffecterActuelle(date: string, id: number) {
+      return  this.http.get(`${environment.apiUrl}/api/affecters?dateFin[after]=${date}&compteAffecter.partenaire.id=${id}`);
+     }
+  deleteAffecter(id: number) {
+      return  this.http.delete(`${environment.apiUrl}/api/affecters/${id}`);
+     }
+}

@@ -10,7 +10,7 @@ import { Partenaire } from 'src/app/modele/partenaire';
 import { Collection } from 'ngx-pagination/dist/paginate.pipe';
 import { AffecterService } from 'src/app/service/affecter.service';
 import { Affecter } from 'src/app/modele/affecter';
-import { setTimeout } from 'timers';
+import {formatDate} from '@angular/common';
 
 @Component({
   selector: 'app-add-affecter',
@@ -19,15 +19,16 @@ import { setTimeout } from 'timers';
 })
 export class AddAffecterComponent implements OnInit {
   formAffecter: FormGroup;
-  message : string;
+  message: string;
   submitted = false;
   error: boolean;
+  idPartenaire: number;
   username: string;
   success: boolean; // si le depot est ok
   comptes: [];
   partenaire: Partenaire;
   users: [];
-  affecter: Affecter;
+  affecters: [];
     constructor(
       private fb: FormBuilder,
       private router: Router,
@@ -39,7 +40,6 @@ export class AddAffecterComponent implements OnInit {
     ngOnInit() {
       this.createForm();
       this.setComptesEtUsers();
-
       //console.log(this.comptes);
      // console.log(this.users);
       // console.log(this.getcompte());
@@ -53,14 +53,19 @@ export class AddAffecterComponent implements OnInit {
           if ( nbrReponse > 0) { // si c'est partenaire
             this.comptes = data['hydra:member'][0].comptes ;
             this.users = data['hydra:member'][0].users ;
+            this.idPartenaire = data['hydra:member'][0].id;
+            this.getAffecterActuelle();
+            //console.log(data['hydra:member'][0].id);
           } else { // si c'est un admin partenaire
           return this.userService.getUsers(this.username).subscribe(
             datas => {
-              const id = datas['hydra:member'][0].partenaire.id; // recuperons id du partenaire pour avoir les user
+              this.idPartenaire = datas['hydra:member'][0].partenaire.id; // recuperons id du partenaire pour avoir les user
               this.comptes = datas['hydra:member'][0].partenaire.comptes ;
-              this.userService.getByIdPartenaire(id).subscribe( 
+              this.userService.getByIdPartenaire(this.idPartenaire).subscribe(
                 user => {
                   this.users = user["hydra:member"];
+                  this.getAffecterActuelle();
+
                 }
               ) ;
 
@@ -91,12 +96,13 @@ export class AddAffecterComponent implements OnInit {
         userAffecter : this.formAffecter.value.userAffecter,
         compteAffecter : this.formAffecter.value.compteAffecter,
        }
-      this.affecterService.postCompte(affecter).subscribe(
+      this.affecterService.postAffecter(affecter).subscribe(
         data => {
           console.log(data);
           this.success = true;
           this.submitted = false;
           this.createForm();
+          this.getAffecterActuelle();
         },
         error => {
          console.log(error.error["hydra:description"]);
@@ -120,5 +126,24 @@ export class AddAffecterComponent implements OnInit {
     }
     setSuccess() {
       this.success = false;
+    }
+    getAffecterActuelle() {
+       const date = formatDate(new Date(), 'yyyy-MM-dd', 'en');
+       console.log(this.idPartenaire);
+       this.affecterService.getAffecterActuelle(date, this.idPartenaire).subscribe(
+       data => {
+         this.affecters = data["hydra:member"];
+         //console.log(this.idPartenaire);
+         //console.log(data);
+       }
+     );
+    }
+    onDelete(id: number) {
+      this.affecterService.deleteAffecter(id).subscribe(
+        data => {
+         confirm("Etes-vous sur de vouloir supprimer");
+         this.getAffecterActuelle();
+        }
+      );
     }
 }
