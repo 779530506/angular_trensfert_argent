@@ -1,6 +1,19 @@
 <h2>Faire un dépot</h2>
 <div class="offset-md-2 col-md-8 ">
 <form [formGroup]="formDepot" (ngSubmit)="onSubmit()">
+      <!-- si le user n'est pas autorisé pas -->
+      <div *ngIf="error" [style.display]="error ? 'block' : 'none'" class="modal">
+        <div class="modal-dialog modal-md  ">
+          <div class="modal-content">
+            <div class="modal-body">
+              <p [style.color]="setCouleur('red')">{{message}}</p>            
+              <button type="button" class="btn btn-danger" data-dismiss="modal"
+               (click) = "setError()">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- fin  -->   
   <!-- <img class="col-md-12" src="../../../assets/img/depot.jpeg" alt=""> -->
                     <!-- si le compte nexiste pas -->
                     <div [style.display]="noCompte ? 'block' : 'none'" class="modal">

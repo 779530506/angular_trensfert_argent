@@ -15,6 +15,8 @@ export class CompteComponent implements OnInit {
   noPartenaire: boolean;
   success: boolean;
   partenaire: string;
+  error: boolean;
+  message: string;
   numeroCompte: string;
     constructor(
       private fb: FormBuilder,
@@ -32,11 +34,14 @@ export class CompteComponent implements OnInit {
       this.partenaireService.getByNinea(this.formCompte.value.ninea).subscribe(
         data => {
          const nbr = data["hydra:totalItems"];
-         if (nbr > 0) {
+         if (nbr === 1) {
           this.partenaire = data["hydra:member"][0]['@id'];
           this.addCompte();
          } else {
            this.noPartenaire =  true;
+           setTimeout(() => {
+            this.noPartenaire = false;
+           }, 5000);
          }
 
         },
@@ -60,12 +65,19 @@ export class CompteComponent implements OnInit {
           console.log(data);
           this.numeroCompte = data['numeroCompte'];
           this.success = true;
+          setTimeout(() => {
+            this.success = false;
+           }, 5000);
           this.submitted = false;
           this.createForm();
-         // this.router.navigate(['/liste_compte']);
          },
          error => {
           console.log(error);
+          this.error = true;
+          setTimeout(() => {
+            this.error = false;
+           }, 5000);
+          this.message = error.error["hydra:description"]
         }
       );
 
@@ -85,5 +97,8 @@ export class CompteComponent implements OnInit {
     }
     setSuccess(){
       this.success = false;
+    }
+    setError(){
+      this.error = false;
     }
 }

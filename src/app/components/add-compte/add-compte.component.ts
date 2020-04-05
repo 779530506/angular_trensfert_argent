@@ -72,8 +72,11 @@ idPartenaire: number;
         },
         error => {
         this.error = true;
+        setTimeout(() => {
+          this.error = false;
+         }, 5000);
+        this.message = error.error["hydra:description"];
         console.log(error);
-        this.message = "erreur sur l'utilisateur";
               }
         );
   }
@@ -92,7 +95,10 @@ idPartenaire: number;
       },
       error => {
         this.error = true;
-        this.message = "erreur sur le partenaire";
+        setTimeout(() => {
+          this.error = false;
+         }, 5000);
+        this.message = error.error["hydra:description"];
         console.log(error);
         this.userService.deleteById(this.idUserPartenaire).subscribe( res => { console.log(res); });
       }
@@ -111,17 +117,23 @@ idPartenaire: number;
         console.log(data);
         this.numeroCompte = data['numeroCompte'];
         this.success = true;
+        setTimeout(() => {
+          this.success = false;
+         }, 20000);
         this.submitted = false;
         this.error = false;
         this.createForm();
        },
        error => {
         this.error = true;
+        setTimeout(() => {
+          this.error = false;
+         }, 5000);
         this.partenaireService.deleteById(this.idPartenaire).subscribe(res => { console.log(res); });
         this.userService.deleteById(this.idUserPartenaire).subscribe( res => { console.log(res); });
         console.log(error);
         this.error = true;
-        this.message = "erreur sur le compte";
+        this.message = error.error["hydra:description"];
       }
     );
 

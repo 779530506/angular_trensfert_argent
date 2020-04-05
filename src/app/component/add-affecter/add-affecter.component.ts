@@ -103,11 +103,17 @@ export class AddAffecterComponent implements OnInit {
           this.submitted = false;
           this.createForm();
           this.getAffecterActuelle();
+          setTimeout(() => {
+            this.success = false;
+           }, 5000);
         },
         error => {
          console.log(error.error["hydra:description"]);
          this.message = error.error["hydra:description"];
          this.error = true;
+         setTimeout(() => {
+          this.error = false;
+         }, 5000);
         }
       );
       console.log(affecter);

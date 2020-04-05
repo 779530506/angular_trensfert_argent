@@ -16,6 +16,7 @@ export class ListeUserComponent implements OnInit {
   view: boolean; // modal view
   submitted = false;
   erreur = false;
+  success: boolean;
   formUser: FormGroup;
   formRecherche: FormGroup;
   contrainte: boolean; // pour verifier si l'utisateur n'est pas supprimé
@@ -24,6 +25,7 @@ export class ListeUserComponent implements OnInit {
   user: User;
   utilisateur: User;
   userFilter = "";
+  message: string;
 
 
   constructor(private fb: FormBuilder, private userService: UserServiceService, private router: Router  ) { }
@@ -79,6 +81,8 @@ export class ListeUserComponent implements OnInit {
   show()
   {
     this.createForm();
+    this.success = false;
+    this.submitted = false;
     //this.formUser.reset();
     this.showModal = true; // Show-Hide Modal Check
   }
@@ -86,6 +90,7 @@ export class ListeUserComponent implements OnInit {
   hide()
   {
     this.showModal = false;
+    this.success = false;
   }
   onStatus(id: number) {
     this.userService.getStatus(id).subscribe(
@@ -108,6 +113,7 @@ export class ListeUserComponent implements OnInit {
 get f() { return this.formUser.controls; }
 onSubmit() {
     this.submitted = true;
+    this.success = false;
     // stop here if form is invalid
     if (this.formUser.invalid) {
         return;
@@ -134,13 +140,22 @@ onAdd() {
   //console.log(user);
   this.userService.postOrPutUser(user).subscribe(
   res => {
+             setTimeout(() => {
               this.showModal = false;
-              this.submitted = false;
-              this.getUser();
+             }, 10000);
+             this.submitted = false;
+             this.getUser();
+             this.success = true;
+            // tslint:disable-next-line: quotemark
+             this.message = user.username;
       },
       error => {
         this.erreur = true;
-      // console.log(this.erreur);
+        //console.log(error);
+        this.message = error.error["hydra:description"];
+        setTimeout(() => {
+          this.erreur = false;
+         }, 5000);
       }
        );
 }

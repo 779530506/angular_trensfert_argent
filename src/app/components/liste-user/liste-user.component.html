@@ -94,18 +94,24 @@
       <div class="modal-header">
         <h4 class="modal-title" id="myModalLabel">Créer un utilisateur</h4>
       </div>
-      <!-- si username existe -->
+      <!-- si il y a une erreur -->
       <div class="modal-body">
         <div *ngIf="erreur" [style.display]="erreur ? 'block' : 'none'" class="modal">
           <div class="modal-dialog modal-sm ">
             <div class="modal-content">
               <div class="modal-body">
-                <p [style.color]="setCouleur('red')" class="alert alert-danger"> Attention!  username doit être unique </p>            
+                <p [style.color]="setCouleur('red')" class="alert alert-danger">{{message}}</p>            
                 <button type="button" class="btn btn-danger" data-dismiss="modal" (click) = "setErreur()">Close</button>
               </div>
             </div>
           </div>
         </div>
+        <!-- fin -->
+             <!-- si le user est enregistré -->
+        <div *ngIf="success">
+          <p class="alert alert-success">{{message}} est enrégistré avec succés</p>
+        </div>
+        <!-- fin -->
 
         <form [formGroup]="formUser">
             <div class="">

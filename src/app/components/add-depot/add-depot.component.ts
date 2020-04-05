@@ -13,6 +13,8 @@ import { CompteService } from 'src/app/service/compte.service';
 export class AddDepotComponent implements OnInit {
   formDepot: FormGroup;
   submitted = false;
+  error: boolean;
+  message: string;
   success: boolean; // si le depot est ok
   limit: boolean; // si le solde ateint la limit
   noCompte: boolean;
@@ -28,8 +30,6 @@ export class AddDepotComponent implements OnInit {
     }
     onSubmit() {
       this.submitted = true;
-     // this.setNoCompte();
-      //this.setSuccess();
       if (this.formDepot.invalid) {
          return;
      }
@@ -43,6 +43,9 @@ export class AddDepotComponent implements OnInit {
             this.addDepot();
           } else {
             this.noCompte =  true;
+            setTimeout(() => {
+              this.noCompte = false;
+             }, 5000);
           }
         },
         error => {
@@ -64,11 +67,20 @@ export class AddDepotComponent implements OnInit {
         data => {
           console.log(data);
           this.success = true;
+          setTimeout(() => {
+            this.success = false;
+           }, 5000);
           this.createForm();
           this.submitted = false;
          },
          error => {
           console.log(error);
+          this.error = true;
+          this.message = error.error["hydra:description"];
+          console.log(this.message);
+          setTimeout(() => {
+            this.error = false;
+           }, 5000);
           if (error.status === 420) {
             this.limit = true;
           }
@@ -91,6 +103,9 @@ export class AddDepotComponent implements OnInit {
     }
     setSuccess(){
       this.success = false;
+    }
+    setError(){
+      this.error = false;
     }
     setLimit(){
       this.limit = false;
