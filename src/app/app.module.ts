@@ -26,12 +26,8 @@ import { AddPartenaireComponent } from './components/add-partenaire/add-partenai
 import { CompteComponent } from './components/compte/compte.component';
 import { ListeCompteComponent } from './components/liste-compte/liste-compte.component';
 import { AddDepotComponent } from './components/add-depot/add-depot.component';
-<<<<<<< HEAD
 import { NgxPaginationModule } from 'ngx-pagination';
 import { AddAffecterComponent } from './component/add-affecter/add-affecter.component';
-=======
->>>>>>> 585d63fead578fab9ec975b6fcab997318c5702c
-
 
 @NgModule({
   declarations: [
@@ -50,10 +46,7 @@ import { AddAffecterComponent } from './component/add-affecter/add-affecter.comp
     CompteComponent,
     ListeCompteComponent,
     AddDepotComponent,
-<<<<<<< HEAD
     AddAffecterComponent,
-=======
->>>>>>> 585d63fead578fab9ec975b6fcab997318c5702c
   ],
   imports: [
     BrowserModule,
