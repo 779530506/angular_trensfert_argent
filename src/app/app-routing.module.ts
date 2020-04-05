@@ -12,7 +12,10 @@ import { AddPartenaireComponent } from './components/add-partenaire/add-partenai
 import { CompteComponent } from './components/compte/compte.component';
 import { ListeCompteComponent } from './components/liste-compte/liste-compte.component';
 import { AddDepotComponent } from './components/add-depot/add-depot.component';
+<<<<<<< HEAD
 import { AddAffecterComponent } from './component/add-affecter/add-affecter.component';
+=======
+>>>>>>> 585d63fead578fab9ec975b6fcab997318c5702c
 
 
 const routes: Routes = [
@@ -20,6 +23,7 @@ const routes: Routes = [
   {
     path: '', component: DefaultComponent,
     children: [
+<<<<<<< HEAD
      { path: 'accueil', component: DashboardComponent,  canActivate: [AuthGuard] },
      { path: 'add_compte', component: AddCompteComponent,  canActivate: [AuthGuard]},
      { path: 'add_affecter', component: AddAffecterComponent,  canActivate: [AuthGuard]},
@@ -29,6 +33,16 @@ const routes: Routes = [
      { path: 'view_user/:id', component:  ViewUserComponent, canActivate: [AuthGuard] },
      { path: 'add_depot', component:  AddDepotComponent, canActivate: [AuthGuard] },
      { path: 'edit_user/:id', component:  AddUserComponent, canActivate: [AuthGuard] },
+=======
+     { path: 'accueil', component: DashboardComponent },
+     { path: 'add_compte', component: AddCompteComponent},
+     { path: 'create_compte', component: CompteComponent},
+     { path: 'liste_compte', component: ListeCompteComponent},
+     { path: 'liste_user', component: ListeUserComponent },
+     { path: 'view_user/:id', component:  ViewUserComponent },
+     { path: 'add_depot', component:  AddDepotComponent },
+     { path: 'edit_user/:id', component:  AddUserComponent },
+>>>>>>> 585d63fead578fab9ec975b6fcab997318c5702c
     ],
     canActivate: [AuthGuard]
   },

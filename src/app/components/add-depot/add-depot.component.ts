@@ -13,8 +13,11 @@ import { CompteService } from 'src/app/service/compte.service';
 export class AddDepotComponent implements OnInit {
   formDepot: FormGroup;
   submitted = false;
+<<<<<<< HEAD
   error: boolean;
   message: string;
+=======
+>>>>>>> 585d63fead578fab9ec975b6fcab997318c5702c
   success: boolean; // si le depot est ok
   limit: boolean; // si le solde ateint la limit
   noCompte: boolean;
@@ -30,6 +33,11 @@ export class AddDepotComponent implements OnInit {
     }
     onSubmit() {
       this.submitted = true;
+<<<<<<< HEAD
+=======
+     // this.setNoCompte();
+      //this.setSuccess();
+>>>>>>> 585d63fead578fab9ec975b6fcab997318c5702c
       if (this.formDepot.invalid) {
          return;
      }
@@ -37,15 +45,21 @@ export class AddDepotComponent implements OnInit {
       this.compteService.getByNumeroCompte(numeroCompte).subscribe(
         data => {
           const nbr = data["hydra:totalItems"];
+<<<<<<< HEAD
           console.log(nbr);
+=======
+>>>>>>> 585d63fead578fab9ec975b6fcab997318c5702c
           if (nbr > 0) {
             this.compte = data["hydra:member"][0]['@id'];
             this.addDepot();
           } else {
             this.noCompte =  true;
+<<<<<<< HEAD
             setTimeout(() => {
               this.noCompte = false;
              }, 5000);
+=======
+>>>>>>> 585d63fead578fab9ec975b6fcab997318c5702c
           }
         },
         error => {
@@ -67,20 +81,26 @@ export class AddDepotComponent implements OnInit {
         data => {
           console.log(data);
           this.success = true;
+<<<<<<< HEAD
           setTimeout(() => {
             this.success = false;
            }, 5000);
+=======
+>>>>>>> 585d63fead578fab9ec975b6fcab997318c5702c
           this.createForm();
           this.submitted = false;
          },
          error => {
           console.log(error);
+<<<<<<< HEAD
           this.error = true;
           this.message = error.error["hydra:description"];
           console.log(this.message);
           setTimeout(() => {
             this.error = false;
            }, 5000);
+=======
+>>>>>>> 585d63fead578fab9ec975b6fcab997318c5702c
           if (error.status === 420) {
             this.limit = true;
           }
@@ -104,9 +124,12 @@ export class AddDepotComponent implements OnInit {
     setSuccess(){
       this.success = false;
     }
+<<<<<<< HEAD
     setError(){
       this.error = false;
     }
+=======
+>>>>>>> 585d63fead578fab9ec975b6fcab997318c5702c
     setLimit(){
       this.limit = false;
     }

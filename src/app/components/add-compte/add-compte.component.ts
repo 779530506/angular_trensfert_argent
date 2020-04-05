@@ -77,6 +77,10 @@ idPartenaire: number;
          }, 5000);
         this.message = error.error["hydra:description"];
         console.log(error);
+<<<<<<< HEAD
+=======
+        this.message = "erreur sur l'utilisateur";
+>>>>>>> 585d63fead578fab9ec975b6fcab997318c5702c
               }
         );
   }
@@ -117,9 +121,12 @@ idPartenaire: number;
         console.log(data);
         this.numeroCompte = data['numeroCompte'];
         this.success = true;
+<<<<<<< HEAD
         setTimeout(() => {
           this.success = false;
          }, 20000);
+=======
+>>>>>>> 585d63fead578fab9ec975b6fcab997318c5702c
         this.submitted = false;
         this.error = false;
         this.createForm();
