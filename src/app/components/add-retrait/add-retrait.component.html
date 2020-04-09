@@ -1,0 +1,87 @@
+<h1>Veuillez saisir le code de la transation</h1>
+<div  *ngIf="success" class="alert alert-success" >{{message}}  </div>
+<div  *ngIf="noCode" class="alert alert-danger" >ce code n'existe pas </div>
+<div  *ngIf="error" class="alert alert-danger" >{{message}} </div>
+<div class="row">
+    <form [formGroup]="formRecherche" (ngSubmit)="onRechcherche()" class="col-md-5 d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" >
+      <div class="input-group">
+      <input type="number" formControlName="code"  class="form-control  bg-light border-0 small"
+       placeholder="code..." [ngClass]="{ 'is-invalid': submitted && f.code.errors }"
+      aria-label="Search" aria-describedby="basic-addon2">
+      <button class="btn btn-primary" type="submit">
+        <i class="fas fa-search fa-sm"></i>
+      </button> 
+      <div *ngIf="submitted && f.code.errors" class="invalid-feedback alert alert-danger">
+      <div *ngIf="f.code.errors.required"> code doit etre un nombre obligatoir</div>
+     </div>
+      <div class="input-group-append">
+    </div>
+  </div>
+</form>
+</div>
+<hr>
+<div *ngIf="existe" class="row">
+  <h4 class="offset-md-1"> code : <span > {{trensfert.code}} </span> </h4>
+  <h4 class="offset-md-1">Montant <span> {{trensfert.montant}} </span></h4>
+  <div class="col-md-4">
+    <form [formGroup]="formRetrait" (ngSubmit)="onSubmit()" class="col-md-5 d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" >
+      <div class="input-group">
+      <input type="text" formControlName="cniBeneficiaire"  class="form-control  bg-light border-0 small"
+       placeholder="cni..." [ngClass]="{ 'is-invalid': submitteds && form.cniBeneficiaire.errors}"
+      aria-label="Search" aria-describedby="basic-addon2">
+      <button class="btn btn-primary" type="submit">
+        Retirer
+      </button>       
+      <div class="input-group-append">
+      </div>
+      <div *ngIf="submitteds && form.cniBeneficiaire.errors" class="invalid-feedback alert alert-danger">
+        <div *ngIf="form.cniBeneficiaire.errors.required"> le numero est obligatoire</div>
+        <div *ngIf="form.cniBeneficiaire.errors.maxlength"> le numero doit avoir maximum  13 caracteres</div>
+        <div *ngIf="form.cniBeneficiaire.errors.minlength"> le numero doit avoir minimum  13 caracteres</div>
+       </div> 
+    </div>
+    </form>
+  </div>
+</div>
+<hr>
+<div *ngIf="existe" class="row tables">  
+<table  class="table table-bordered col-md-5">
+  <tbody>
+    <tr class="bg-warning"> 
+     <td colspan="2">Bénéficiaire </td> 
+     </tr>
+    <tr>
+      <td  class="bg-warning"> Nom </td>
+      <td> {{trensfert.nomBeneficiaire}} </td>
+    </tr>
+    <tr>
+      <td  class="bg-warning">Prénom</td>
+      <td>{{trensfert.prenomBeneficiaire}} </td>
+    </tr>
+    <tr >
+      <td  class="bg-warning">Telephon</td>
+      <td>{{trensfert.telBeneficiaire}} </td>
+    </tr>
+  </tbody>
+</table>
+<table *ngIf="trensfert" class="table table-bordered  col-md-5 offset-md-1 ">
+  <tbody>
+    <tr class="bg-warning"> 
+      <td colspan="2">Expéditeur </td> 
+      </tr>    <tr>
+      <td class="bg-warning"> Nom </td>
+      <td scope="row"> {{trensfert.nomExpediteur}} </td>
+    </tr>
+    <tr>
+      <td class="bg-warning">Prénom</td>
+      <td>{{trensfert.prenomExpediteur}} </td>
+    </tr>
+    <tr>
+      <td class="bg-warning">Telephon</td>
+      <td>{{trensfert.telExpediteur}} </td>
+    </tr>
+    <tr>
+  </tbody>
+</table>
+
+</div>

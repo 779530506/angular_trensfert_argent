@@ -1,0 +1,97 @@
+<h2>Trensfert</h2>
+<div  *ngIf="error" class="alert alert-danger" >{{message}}  </div>
+<div class="row "  *ngIf="success" class="alert alert-success"> 
+    <p class="">votre trensfert est effectué avec success  
+     voici votre code de retrait {{code}} <button class="offset-md-8 " (click)="setSuccess()" class="btn btn-dark">Resete</button> </p>
+     <div  ></div>
+    </div>
+    <div class=" col-md-8 offset-md-1">
+   <form [formGroup]="formTrensfert" (ngSubmit)="onSubmit()">
+  <fieldset class="scheduler-border">
+    <legend class="scheduler-border">Information personnelles du client</legend>
+<div class="form-row">
+  <div class="form-group col-md-6">
+   <input type="text" class="form-control" placeholder="nomExpediteur" id="nomExpediteur" 
+    formControlName="nomExpediteur" 
+   [ngClass]="{ 'is-invalid': submitted && f.nomExpediteur.errors }">
+    <div *ngIf="submitted && f.nomExpediteur.errors" class="invalid-feedback ">
+    <div *ngIf="f.nomExpediteur.errors.required">obligatoire</div>
+  </div> 
+ </div>
+ <div class="form-group col-md-6">
+   <input type="text" class="form-control" id="prenomExpediteur"  formControlName="prenomExpediteur" 
+    placeholder="prenomExpediteur" [ngClass]="{ 'is-invalid': submitted && f.prenomExpediteur.errors }">
+    <div *ngIf="submitted && f.prenomExpediteur.errors" class="invalid-feedback ">
+      <div *ngIf="f.prenomExpediteur.errors.required">  obligatoire</div>
+  </div>
+ </div>
+</div>
+<div class="form-row">
+<div class="form-group col-md-6 ">
+ <input type="text" class="form-control" id="cniExpediteur"  formControlName="cniExpediteur" 
+ placeholder="cniExpediteur" [ngClass]="{ 'is-invalid': submitted && f.cniExpediteur.errors }">
+ <div *ngIf="submitted && f.cniExpediteur.errors" class="invalid-feedback ">
+  <div *ngIf="f.cniExpediteur.errors.required">obligatoire</div>
+</div>
+</div>
+<div class="form-group col-md-6">
+ <input type="text" class="form-control" id="telExpediteur"  formControlName="telExpediteur" 
+  [ngClass]="{ 'is-invalid': submitted && f.telExpediteur.errors }"
+ placeholder="telExpediteur">
+ <div *ngIf="submitted && f.telExpediteur.errors" class="invalid-feedback ">
+  <span *ngIf="f.telExpediteur.errors.minlength"> le tel doit avoir 9 caracteres</span>
+  <span *ngIf="f.telExpediteur.errors.required">obligatoire</span>
+</div>
+</div>
+</div>
+</fieldset>
+<!-- beneficiaire -->
+<fieldset class="scheduler-border">
+    <legend class="scheduler-border">Information du bénéficiaire</legend>
+<div class="form-row">
+  <div class="form-group col-md-6">
+   <input type="text" class="form-control" placeholder="nomBeneficiaire" id="nomBeneficiaire" 
+    formControlName="nomBeneficiaire" 
+   [ngClass]="{ 'is-invalid': submitted && f.nomBeneficiaire.errors }">
+    <div *ngIf="submitted && f.nomBeneficiaire.errors" class="invalid-feedback ">
+    <div *ngIf="f.nomBeneficiaire.errors.required">obligatoire</div>
+  </div> 
+ </div>
+ <div class="form-group col-md-6">
+   <input type="text" class="form-control" id="prenomBeneficiaire"  formControlName="prenomBeneficiaire" 
+    placeholder="prenomBeneficiaire" [ngClass]="{ 'is-invalid': submitted && f.prenomBeneficiaire.errors }">
+    <div *ngIf="submitted && f.prenomBeneficiaire.errors" class="invalid-feedback ">
+      <div *ngIf="f.prenomBeneficiaire.errors.required">  obligatoire</div>
+  </div>
+ </div>
+</div>
+<div class="form-row">
+
+<div class="form-group col-md-6">
+ <input type="text" class="form-control" id="telBeneficiaire"  formControlName="telBeneficiaire" 
+  [ngClass]="{ 'is-invalid': submitted && f.telBeneficiaire.errors }"
+ placeholder="telBeneficiaire">
+ <div *ngIf="submitted && f.telBeneficiaire.errors" class="invalid-feedback ">
+  <span *ngIf="f.telBeneficiaire.errors.minlength"> le telBeneficiaire doit avoir 9 caracteres</span>
+  <span *ngIf="f.telBeneficiaire.errors.required">obligatoire</span>
+</div>
+</div>
+</div>
+</fieldset>
+<!-- fin -->
+
+<div class="form-row">
+   <div class="form-group col">
+       <input type="number" placeholder="montant" class="form-control" formControlName="montant"
+        id="montant" [ngClass]="{ 'is-invalid': submitted && f.montant.errors }"  >
+        <div *ngIf="submitted && f.montant.errors" class="invalid-feedback ">
+          <div *ngIf="f.montant.errors.required">obligatoire</div>
+        </div>
+     </div>
+</div>
+
+ <button   class="btn btn-primary btn-block ">Enregistrer</button>
+</form>
+</div>
+
+

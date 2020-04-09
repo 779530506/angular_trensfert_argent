@@ -45,7 +45,19 @@
     </li>
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
-
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwos"
+       aria-expanded="true" aria-controls="collapseTwo">
+        <i class="fas fa-fw fa-cog"></i>
+        <span>Transaction</span>
+      </a>
+      <div id="collapseTwos" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded"> 
+          <a class="collapse-item " routerLink="/add_trensfert">Trensfert</a>
+          <a class="collapse-item " routerLink="/add_retrait">Retrait</a>
+        </div>
+      </div>
+    </li>
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">
       <button class="rounded-circle border-0" id="sidebarToggle"></button>

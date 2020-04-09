@@ -95,19 +95,19 @@ export class AddDepotComponent implements OnInit {
       });
     }
     get f() { return this.formDepot.controls; }
-    setCouleur(color: string){
+    setCouleur(color: string) {
       return  color;
     }
-    setNoCompte(){
+    setNoCompte() {
       this.noCompte = false;
     }
-    setSuccess(){
+    setSuccess() {
       this.success = false;
     }
-    setError(){
+    setError() {
       this.error = false;
     }
-    setLimit(){
+    setLimit() {
       this.limit = false;
     }
 

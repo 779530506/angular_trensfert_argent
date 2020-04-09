@@ -1,0 +1,27 @@
+.tables{
+ //   margin-top: 5%;
+}
+div h5 {
+    color: chartreuse;
+    font-weight: bolder;
+}
+.ng-valid:not(form){
+    border-left: 4px solid green;
+}
+h4  {
+    background:#1155ff;
+    font-weight: bolder;
+    color: black;
+    font-size: 1.2em;
+}
+input {
+    height: 40px;
+    background-color: snow;
+    border: steelblue 2px solid;
+}
+table tr td{
+    font-size: 1.2em;
+    color: black;
+    font-weight: bolder;
+    text-align: center;
+}

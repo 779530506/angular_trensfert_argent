@@ -1,3 +1,5 @@
+import { AddRetraitComponent } from './components/add-retrait/add-retrait.component';
+import { AddTrensfertComponent } from './components/add-trensfert/add-trensfert.component';
 import { DefaultComponent } from './layout/default/default.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -16,6 +18,7 @@ import { AddAffecterComponent } from './component/add-affecter/add-affecter.comp
 
 
 
+
 const routes: Routes = [
   { path: '', component: LoginComponent},
   {
@@ -24,6 +27,8 @@ const routes: Routes = [
      { path: 'accueil', component: DashboardComponent,  canActivate: [AuthGuard] },
      { path: 'add_compte', component: AddCompteComponent,  canActivate: [AuthGuard]},
      { path: 'add_affecter', component: AddAffecterComponent,  canActivate: [AuthGuard]},
+     { path: 'add_trensfert', component: AddTrensfertComponent,  canActivate: [AuthGuard]},
+     { path: 'add_retrait', component:  AddRetraitComponent,  canActivate: [AuthGuard]},
      { path: 'create_compte', component: CompteComponent,  canActivate: [AuthGuard]},
      { path: 'liste_compte', component: ListeCompteComponent,  canActivate: [AuthGuard]},
      { path: 'liste_user', component: ListeUserComponent, canActivate: [AuthGuard] },

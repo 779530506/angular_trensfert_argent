@@ -18,6 +18,7 @@ import { UserServiceService } from './service/user-service.service';
 import { PartenaireServiceService } from './service/partenaire-service.service';
 import { CompteService } from './service/compte.service';
 import { AffecterService } from './service/affecter.service';
+import { TrensfertService } from './service/trensfert.service';
 import { AddCompteComponent } from './components/add-compte/add-compte.component';
 import { ListeUserComponent } from './components/liste-user/liste-user.component';
 import { ViewUserComponent } from './components/view-user/view-user.component';
@@ -28,6 +29,8 @@ import { ListeCompteComponent } from './components/liste-compte/liste-compte.com
 import { AddDepotComponent } from './components/add-depot/add-depot.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { AddAffecterComponent } from './component/add-affecter/add-affecter.component';
+import { AddTrensfertComponent } from './components/add-trensfert/add-trensfert.component';
+import { AddRetraitComponent } from './components/add-retrait/add-retrait.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +50,8 @@ import { AddAffecterComponent } from './component/add-affecter/add-affecter.comp
     ListeCompteComponent,
     AddDepotComponent,
     AddAffecterComponent,
+    AddTrensfertComponent,
+    AddRetraitComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,6 +67,7 @@ import { AddAffecterComponent } from './component/add-affecter/add-affecter.comp
     PartenaireServiceService,
     CompteService,
     AffecterService,
+    TrensfertService,
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
 
   ],
